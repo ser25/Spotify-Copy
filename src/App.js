@@ -1,6 +1,6 @@
 import TheSidebar from "./components/Sidebar/TheSidebar";
 import TheHeader from "./components/Header/TheHeader";
-import TheMain from "./components/TheMain";
+import TheMain from "./components/Main/TheMain";
 import TheRegistration from "./components/RegistrationBlock/TheRegistration";
 import TheSidebarOverlay from "./components/TheSidebarOverlay";
 
