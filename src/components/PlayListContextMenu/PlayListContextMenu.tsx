@@ -1,35 +1,11 @@
-import React from 'react';
-import {IMenuItems} from './type/type'
+import React, {FC} from 'react';
 import PlayListContextSubmenuItem from "./PlayListContextSubmenuItem";
+import {IPlayListContextMenuProps} from "./type/type";
 
-
-const PlayListContextMenu = () => {
-
-    const menuItems: IMenuItems[] = [
-        {
-            label: ' Add to Your Library'
-        },
-        {
-            label: 'Share',
-            submenus: [
-                {
-                    label: 'Copy link to playlist'
-                },
-                {
-                    label: 'Embed playlist'
-                },
-            ],
-        },
-        {
-            label: 'About recommendations'
-        },
-        {
-            label: 'Open in Desktop app'
-        },
-    ]
-
+const PlayListContextMenu: FC<IPlayListContextMenuProps> = ({classes, menuItems}) => {
     return (
-        <ul className="absolute top-9 left-9 bg-[#282828] text-[#eaeaea] text-sm divide-y divide-[#3e3e3e] p-1 rounded shadow-xl cursor-default whitespace-nowrap z-10 hidden group-hover:block">
+        <ul className={classes}
+        >
             {menuItems.map(menuItem =>
                 <PlayListContextSubmenuItem key={menuItem.label}
                                             submenus={menuItem.submenus}
