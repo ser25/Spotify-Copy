@@ -1313,14 +1313,12 @@ const TheMain = () => {
     useEffect(() => {
         const hash = window.location.hash
         let token = window.localStorage.getItem('token')
-
         if (!token && hash) {
             token = hash.substring(1).split("&").find(elem => elem.startsWith("access_token")).split("=")[1]
 
             window.location.hash = ""
             window.localStorage.setItem("token", token)
         }
-
         setToken(token)
     }, [])
 
@@ -1350,12 +1348,10 @@ const TheMain = () => {
         })
 
         setAlbums(data.albums)
-        console.log(data.albums)
     }
     useEffect(() => {
         searchArtists()
     }, [])
-    console.log(albums)
     return (
         <main className="text-white relative bg-black">
             <div className="h-[275px] bg-gradient-to-b from-[#1f1f1f] to-[#121212] absolute w-full"></div>
@@ -1374,8 +1370,10 @@ const TheMain = () => {
                             See all
                         </a>
                     </div>
-                    <div //1
-                        className="grid sm:grid-cols-playlists-mobile md:grid-cols-playlists-tablet lg:grid-cols-playlists-desktop gap-5">
+                    <div
+                        className="grid sm:grid-cols-playlists-mobile md:grid-cols-playlists-tablet
+                         lg:grid-cols-playlists-desktop gap-5"
+                    >
                         {albums.map(album =>
                             <PlayList key={album.id} url={album.images[0].url} title={album.name}
                                       singer={album.artists[0].name}/>

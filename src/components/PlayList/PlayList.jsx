@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, useState} from 'react';
 import PlayListContextMenu from "../PlayListContextMenu/PlayListContextMenu";
 import PlayListCover from "./PlayListCover";
 import PlayListButtonPlay from "./PlayListButtonPlay";
@@ -8,12 +8,22 @@ import {useSelector} from "react-redux";
 import {selectPlayListContextMenu} from "../../redux/slices/PlayListContextMenu/selectors";
 
 const PlayList = ({title, url, singer}) => {
-    console.log('pop', title, url, singer)
-    const menuItems = useSelector(selectPlayListContextMenu)
+    const [isContextMenu, setIsContextMenu] = useState(false)
+    const bgClasses = isContextMenu ? 'bg-[#272727]' : 'bg-[#181818] hover:bg-[#272727]'
+    const openContextMenu = (e) => {
+        e.preventDefault()
+        setIsContextMenu(true)
+    }
+    const closeContextMenu = () => {
+        setIsContextMenu(false)
+
+    }
     return (
         <a
             href="/"
-            className="relative p-4 rounded-md bg-[#181818] hover:bg-[#272727] duration-200 group"
+            className={`relative p-4 rounded-md  duration-200 group ${bgClasses}`}
+            onContextMenu={(event) => openContextMenu(event)}
+            onClick={event => event.preventDefault()}
         >
             <div className="relative">
                 <PlayListCover url={url}/>
@@ -21,13 +31,13 @@ const PlayList = ({title, url, singer}) => {
             </div>
             <PlayListTitle title={title}/>
             <PlayListDescription singer={singer}/>
-            <PlayListContextMenu menuItems={menuItems}
-                classes="absolute top-9 left-9 bg-[#282828] text-[#eaeaea]
-                text-sm divide-y divide-[#3e3e3e] p-1 rounded shadow-xl cursor-default whitespace-nowrap z-10 hidden
-                group-hover:block"
-            />
+            {isContextMenu && (<PlayListContextMenu onClose={closeContextMenu} />)}
+
         </a>
     );
 };
 
 export default PlayList;
+
+
+// hidden 3xl:block

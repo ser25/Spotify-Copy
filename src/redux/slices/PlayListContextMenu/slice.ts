@@ -2,7 +2,7 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {PlayListContextMenuSliceState} from "./types";
 
 
-const initialState: PlayListContextMenuSliceState = {
+const initialState = {
     menuItems: [
         {
             label: ' Add to Your Library'
@@ -24,7 +24,8 @@ const initialState: PlayListContextMenuSliceState = {
         {
             label: 'Open in Desktop app'
         },
-    ]
+    ],
+
 }
 
 

@@ -33,27 +33,27 @@ const SpotifyApi = () => {
 
     const searchArtists = async (e) => {
         e.preventDefault()
-        const {data} = await axios.get("\thttps://api.spotify.com/v1/albums", {
+        const {data} = await axios.get("https://api.spotify.com/v1/me", {
             headers: {
                 Authorization: `Bearer ${token}`
             },
-            params: {
-                ids: '3YPFaTR7WMi1Hd4NVKdCJx,' +
-                    '3Kbuu2tHsIbplFUkB7a5oE,' +
-                    '3cGKAHAUhAaTTezK4GbBhQ,' +
-                    '32iAEBstCjauDhyKpGjTuq,' +
-                    '3T4tUhGYeRNVUGevb0wThu,' +
-                    '47BiFcV59TQi2s9SkBo2pb,' +
-                    '1kTlYbs28MXw7hwO0NLYif,' +
-                    '1ORxRsK3MrSLvh7VQTF01F,' +
-                    '5VoeRuTrGhTbKelUfwymwu,' +
-                    '0JGOiO34nwfUdDrD612dOp',
-                // type: "tracks"
-            }
+            // params: {
+            //     ids: '3YPFaTR7WMi1Hd4NVKdCJx,' +
+            //         '3Kbuu2tHsIbplFUkB7a5oE,' +
+            //         '3cGKAHAUhAaTTezK4GbBhQ,' +
+            //         '32iAEBstCjauDhyKpGjTuq,' +
+            //         '3T4tUhGYeRNVUGevb0wThu,' +
+            //         '47BiFcV59TQi2s9SkBo2pb,' +
+            //         '1kTlYbs28MXw7hwO0NLYif,' +
+            //         '1ORxRsK3MrSLvh7VQTF01F,' +
+            //         '5VoeRuTrGhTbKelUfwymwu,' +
+            //         '0JGOiO34nwfUdDrD612dOp',
+            //     // type: "tracks"
+            // }
         })
 
         setArtists(data.albums)
-        console.log(data.albums)
+        console.log(data)
     }
 
     const renderArtists = () => {
@@ -84,7 +84,7 @@ const SpotifyApi = () => {
                     : <h2>Please login</h2>
                 }
 
-                {renderArtists()}
+                {/*{renderArtists()}*/}
 
             </header>
         </div>
