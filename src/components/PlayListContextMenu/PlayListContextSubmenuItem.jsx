@@ -4,25 +4,23 @@ import {IPlayListContextSubmenuItemProps} from './type/type'
 import PlayListContextMenu from "./PlayListContextMenu";
 
 
-const PlayListContextSubmenuItem = ({children: label, subMenuItems}) => {
-   return (
-       <ul className="absolute top-0 left-full bg-[#282828] text-[#eaeaea]
-       text-sm p-1 rounded shadow-xl cursor-default"
-       >
-           {subMenuItems.map(({ label }) => (
-               <li key={label}>
-                   <button
-                       className='w-full p-3 text-left hover:text-white hover:bg-[#3e3e3e] cursor-default'>
-                       {label}
-                   </button>
-               </li>
-           ))}
-       </ul>
-   )
+const PlayListContextSubmenuItem = ({children: label, subMenuItems, menuPositionClasses}) => {
+    return (
+        <ul className={`bg-[#282828] text-[#eaeaea] text-sm p-1 rounded shadow-xl cursor-default absolute ${menuPositionClasses}`}
+        >
+            {subMenuItems.map(({label}) => (
+                <li key={label}>
+                    <button
+                        className='w-full p-3 text-left hover:text-white hover:bg-[#3e3e3e] cursor-default'>
+                        {label}
+                    </button>
+                </li>
+            ))}
+        </ul>
+    )
 };
 
 export default PlayListContextSubmenuItem;
-
 
 
 // if (submenus) {

@@ -1313,22 +1313,20 @@ const TheMain = () => {
     useEffect(() => {
         const hash = window.location.hash
         let token = window.localStorage.getItem('token')
+
         if (!token && hash) {
             token = hash.substring(1).split("&").find(elem => elem.startsWith("access_token")).split("=")[1]
 
             window.location.hash = ""
             window.localStorage.setItem("token", token)
         }
+
         setToken(token)
     }, [])
 
-    const logout = () => {
-        setToken("")
-        window.localStorage.removeItem("token")
-    }
 
     const searchArtists = async () => {
-        const {data} = await axios.get("\thttps://api.spotify.com/v1/albums", {
+        const {data} = await axios.get("https://api.spotify.com/v1/albums", {
             headers: {
                 Authorization: `Bearer ${token}`
             },
@@ -1351,7 +1349,7 @@ const TheMain = () => {
     }
     useEffect(() => {
         searchArtists()
-    }, [])
+    }, [token])
     return (
         <main className="text-white relative bg-black">
             <div className="h-[275px] bg-gradient-to-b from-[#1f1f1f] to-[#121212] absolute w-full"></div>

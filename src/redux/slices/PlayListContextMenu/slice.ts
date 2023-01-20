@@ -16,6 +16,18 @@ const initialState = {
                 {
                     label: 'Embed playlist'
                 },
+                // {
+                //     label: 'Embed playlist 2'
+                // },
+                // {
+                //     label: 'Embed playlist 3'
+                // },
+                // {
+                //     label: 'Embed playlist 4'
+                // },
+                // {
+                //     label: 'Embed playlist 5'
+                // },
             ],
         },
         {
@@ -25,6 +37,7 @@ const initialState = {
             label: 'Open in Desktop app'
         },
     ],
+    isContextMenuOpen: false,
 
 }
 
@@ -32,9 +45,16 @@ const initialState = {
 export const PlayListContextMenuSlice = createSlice({
     name: 'playListContextMenu',
     initialState,
-    reducers: {},
+    reducers: {
+        setIsContextMenuOpen(state, action){
+            state.isContextMenuOpen = action.payload
+        },
+        closeContextMenu(state, action){
+            state.isContextMenuOpen = false
+        }
+    },
 })
 
-export const {} = PlayListContextMenuSlice.actions
+export const {setIsContextMenuOpen, closeContextMenu} = PlayListContextMenuSlice.actions
 
 export default PlayListContextMenuSlice.reducer
