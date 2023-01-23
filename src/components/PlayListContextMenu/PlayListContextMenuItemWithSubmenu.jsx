@@ -3,13 +3,13 @@ import {ChevronRightIcon} from "@heroicons/react/24/outline";
 import PlayListContextMenu from "./PlayListContextMenu";
 import PlayListContextSubmenuItem from "./PlayListContextSubmenuItem";
 
-const PlayListContextMenuItemWithSubmenu = ({children: label, subMenuItems}) => {
+const PlayListContextMenuItemWithSubmenu = ({children: label, subMenuItems, closePreviousSubmenuIfOpen}) => {
     const [menuState, setMenuState] = useState({
         isOpen: false,
         positionClasses: '',
     });
     const subMenuRef = useRef(null)
-    let closeMenuTimer = null;
+    const closeMenuTimer = useRef(null);
 
     function getSubMenuPositionXClasses() {
         const menuItem = subMenuRef.current;
@@ -37,11 +37,8 @@ const PlayListContextMenuItemWithSubmenu = ({children: label, subMenuItems}) => 
     }
 
     const openSubMenu = () => {
-        if (closeMenuTimer) {
-            stopCloseMenuTimer()
+        closePreviousSubmenuIfOpen(startCloseMenuTimer)
 
-            return
-        }
         setMenuState({
             isOpen: true,
             positionClasses: getMenuPositionClasses(),
@@ -55,18 +52,24 @@ const PlayListContextMenuItemWithSubmenu = ({children: label, subMenuItems}) => 
     }
 
     function startCloseMenuTimer() {
-        closeMenuTimer = setTimeout(closeSubMenu, 100);
+        closeMenuTimer.current = setTimeout(closeSubMenu, 100);
+
+        // console.log('start timer', label)
+        // console.log(closeMenuTimer.current)
     }
 
     function stopCloseMenuTimer() {
-        clearTimeout(closeMenuTimer);
+        clearTimeout(closeMenuTimer.current);
+
+        // console.log('stop timer', label)
+        // console.log(closeMenuTimer.current)
     }
 
     useEffect(() => stopCloseMenuTimer);
 
 
     return (
-        <li className='relative' onMouseEnter={openSubMenu} onMouseLeave={startCloseMenuTimer} ref={subMenuRef}>
+        <li className='relative' onMouseEnter={openSubMenu} ref={subMenuRef}>
             <button
                 className='w-full p-3 text-left hover:text-white hover:bg-[#3e3e3e] cursor-default
                      flex justify-between items-center'

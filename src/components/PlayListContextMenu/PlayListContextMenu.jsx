@@ -7,7 +7,15 @@ import {closeContextMenu} from "../../redux/slices/PlayListContextMenu/slice";
 import PlayListContextMenuItemWithSubmenu from "./PlayListContextMenuItemWithSubmenu";
 
 const PlayListContextMenu = (_, ref) => {
-    const dispatch = useDispatch()
+    let closePreviousSubmenu = null;
+
+    function closePreviousSubmenuIfOpen(closeSubmenu = null) {
+        if (closePreviousSubmenu) {
+            closePreviousSubmenu();
+        }
+
+        closePreviousSubmenu = closeSubmenu;
+    }
     const menuItems = useSelector(selectPlayListContextMenu)
     return (
         <ul className="fixed bg-[#282828] text-[#eaeaea]
@@ -19,13 +27,17 @@ const PlayListContextMenu = (_, ref) => {
                         return (
                             <PlayListContextMenuItemWithSubmenu key={menuItem.label}
                                                                 subMenuItems={menuItem.submenus}
+                                                                closePreviousSubmenuIfOpen={closePreviousSubmenuIfOpen}
                             >
                                 {menuItem.label}
                             </PlayListContextMenuItemWithSubmenu>
                         )
                     } else {
                         return (
-                            <PlayListContextMenuItem key={menuItem.label}>{menuItem.label}</PlayListContextMenuItem>
+                            <PlayListContextMenuItem key={menuItem.label} closePreviousSubmenuIfOpen={closePreviousSubmenuIfOpen}
+                            >
+                                {menuItem.label}
+                            </PlayListContextMenuItem>
                         )
                     }
 
