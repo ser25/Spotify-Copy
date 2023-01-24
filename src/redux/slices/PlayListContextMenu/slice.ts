@@ -1,5 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {PlayListContextMenuSliceState} from "./types";
+import useContextMenu from "../../../hooks/useContextMenu";
 
 
 const initialState = {
@@ -41,6 +42,7 @@ const initialState = {
     isContextMenuOpen: false,
     isToastShown: false
 
+
 }
 
 
@@ -53,7 +55,7 @@ export const PlayListContextMenuSlice = createSlice({
         },
         setIsToastShown(state, action){
             state.isToastShown = action.payload
-            state.isContextMenuOpen = false
+            // state.isContextMenuOpen = false
         }
     },
 })

@@ -4,18 +4,14 @@ import {setIsContextMenuOpen, setIsToastShown} from "../../redux/slices/PlayList
 import {selectIsToastShown} from "../../redux/slices/PlayListContextMenu/selectors";
 
 
-const PlayListContextMenuItem = ({children: originalLabel, closePreviousSubmenuIfOpen, alternateLabel}) => {
+const PlayListContextMenuItem = ({children: originalLabel, closePreviousSubmenuIfOpen, alternateLabel, albumUrl}) => {
     const dispatch = useDispatch()
-    const closeToastTimer = useRef();
 
-    function hideToast() {
-        dispatch(setIsToastShown(false))
-    }
 
     function openToast(){
-        dispatch(setIsToastShown(true))
-        closeToastTimer.current = setTimeout(hideToast, 1000);
-
+        if (alternateLabel){
+            dispatch(setIsToastShown(true))
+        }
     }
 
     const [label, setLabel] = useState(originalLabel);

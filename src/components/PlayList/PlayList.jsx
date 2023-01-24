@@ -6,11 +6,16 @@ import PlayListTitle from "./PlayListTitle";
 import PlayListDescription from "./PlayListDescription";
 import {useDispatch, useSelector} from "react-redux";
 import {
-    selectIsContextMenu,
+    selectIsContextMenu, selectIsContextMenuOpen,
     selectIsToastShown,
     selectPlayListContextMenu
 } from "../../redux/slices/PlayListContextMenu/selectors";
-import {closeContextMenu, setIsContextMenu, setIsContextMenuOpen} from "../../redux/slices/PlayListContextMenu/slice";
+import {
+    closeContextMenu,
+    setIsContextMenu,
+    setIsContextMenuOpen,
+    setIsToastShown
+} from "../../redux/slices/PlayListContextMenu/slice";
 import {useAppDispatch} from "../../redux/store";
 import useContextMenu from "../../hooks/useContextMenu";
 import Toast from "../Toast/Toast";
@@ -20,13 +25,29 @@ const clickPosition = {x: null, y: null}
 const PlayList = ({title, url, singer, albumUrl}) => {
     const dispatch = useAppDispatch()
     const closeToastTimer = useRef();
-
     const menuItems = useSelector(selectPlayListContextMenu)
     const IsToastShown = useSelector(selectIsToastShown)
 
-    const {openContextMenu, isOpen, ref} = useContextMenu()
+    const {openContextMenu, isOpen, ref, setIsOpen} = useContextMenu()
+
 
     const bgClasses = isOpen ? 'bg-[#272727]' : 'bg-[#181818] hover:bg-[#272727]'
+
+
+
+    useEffect(() => {
+        function hideToast() {
+            dispatch(setIsToastShown(false))
+        }
+        function openToast() {
+
+            closeToastTimer.current = setTimeout(hideToast, 1000);
+        }
+        if (IsToastShown) {
+            setIsOpen(false)
+            openToast()
+        }
+    })
 
 
     return (

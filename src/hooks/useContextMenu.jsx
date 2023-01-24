@@ -48,7 +48,7 @@ function useContextMenu() {
 
     }
 
-    return { openContextMenu, isOpen, ref}
+    return { openContextMenu, isOpen, ref, setIsOpen}
 }
 
 export default useContextMenu
