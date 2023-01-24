@@ -11,6 +11,8 @@ const PlayListContextMenuItemWithSubmenu = ({children: label, subMenuItems, clos
     const subMenuRef = useRef(null)
     const closeMenuTimer = useRef(null);
 
+    const bgClasses = menuState.isOpen ? 'bg-[#3e3e3e]' : 'hover:bg-[#3e3e3e]'
+
     function getSubMenuPositionXClasses() {
         const menuItem = subMenuRef.current;
         const menuItemWidth = menuItem.offsetWidth;
@@ -71,8 +73,8 @@ const PlayListContextMenuItemWithSubmenu = ({children: label, subMenuItems, clos
     return (
         <li className='relative' onMouseEnter={openSubMenu} ref={subMenuRef}>
             <button
-                className='w-full p-3 text-left hover:text-white hover:bg-[#3e3e3e] cursor-default
-                     flex justify-between items-center'
+                className={`w-full p-3 text-left hover:text-white  cursor-default
+                     flex justify-between items-center ${bgClasses}`}
             >
                 {label}
                 <ChevronRightIcon className='h-4 w-4'/>
