@@ -6,7 +6,6 @@ import PlayListContextMenu from "../PlayListContextMenu/PlayListContextMenu";
 import useContextMenu from "../../hooks/useContextMenu";
 
 const TheSidebar: FC = () => {
-    const { openContextMenu, isContextMenu, contextMenuRef} = useContextMenu()
     return (
         <aside
             id="sidebar"

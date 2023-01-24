@@ -1374,7 +1374,7 @@ const TheMain = () => {
                     >
                         {albums.map(album =>
                             <PlayList key={album.id} url={album.images[0].url} title={album.name}
-                                      singer={album.artists[0].name}/>
+                                      singer={album.artists[0].name} albumUrl={album.external_urls.spotify} />
                         )}
                         {/*<PlayList/>*/}
                     </div>

@@ -1,7 +1,22 @@
 import React, {useEffect, useRef, useState} from 'react';
+import {useDispatch} from "react-redux";
+import {setIsContextMenuOpen, setIsToastShown} from "../../redux/slices/PlayListContextMenu/slice";
+import {selectIsToastShown} from "../../redux/slices/PlayListContextMenu/selectors";
 
 
 const PlayListContextMenuItem = ({children: originalLabel, closePreviousSubmenuIfOpen, alternateLabel}) => {
+    const dispatch = useDispatch()
+    const closeToastTimer = useRef();
+
+    function hideToast() {
+        dispatch(setIsToastShown(false))
+    }
+
+    function openToast(){
+        dispatch(setIsToastShown(true))
+        closeToastTimer.current = setTimeout(hideToast, 1000);
+
+    }
 
     const [label, setLabel] = useState(originalLabel);
 
@@ -30,8 +45,9 @@ const PlayListContextMenuItem = ({children: originalLabel, closePreviousSubmenuI
     }, []);
 
 
+
     return (
-        <li onMouseEnter={() => closePreviousSubmenuIfOpen ? closePreviousSubmenuIfOpen() : null}>
+        <li onClick={openToast} onMouseEnter={() => closePreviousSubmenuIfOpen ? closePreviousSubmenuIfOpen() : null}>
             <button
                 className={`w-full p-3 text-left hover:text-white hover:bg-[#3e3e3e] cursor-default 
                ${alternateLabel ? 'min-w-[150px]' : ''}`}>

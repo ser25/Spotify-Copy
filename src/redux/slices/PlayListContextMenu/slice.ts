@@ -39,6 +39,7 @@ const initialState = {
         },
     ],
     isContextMenuOpen: false,
+    isToastShown: false
 
 }
 
@@ -50,12 +51,13 @@ export const PlayListContextMenuSlice = createSlice({
         setIsContextMenuOpen(state, action){
             state.isContextMenuOpen = action.payload
         },
-        closeContextMenu(state, action){
+        setIsToastShown(state, action){
+            state.isToastShown = action.payload
             state.isContextMenuOpen = false
         }
     },
 })
 
-export const {setIsContextMenuOpen, closeContextMenu} = PlayListContextMenuSlice.actions
+export const {setIsContextMenuOpen, setIsToastShown} = PlayListContextMenuSlice.actions
 
 export default PlayListContextMenuSlice.reducer

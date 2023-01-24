@@ -5,13 +5,14 @@ import PlayListContextMenu from "./PlayListContextMenu";
 import PlayListContextMenuItem from "./PlayListContextMenuItem";
 
 
-const PlayListContextSubmenuItem = ({ subMenuItems, menuPositionClasses}) => {
+const PlayListContextSubmenuItem = ({ subMenuItems, menuPositionClasses, albumUrl}) => {
+
 
     return (
         <ul className={`bg-[#282828] text-[#eaeaea] text-sm p-1 rounded shadow-xl cursor-default absolute ${menuPositionClasses}`}
         >
             {subMenuItems.map(({label, alternateLabel}) => (
-                <PlayListContextMenuItem key={label} alternateLabel={alternateLabel} >{label}</PlayListContextMenuItem>
+                <PlayListContextMenuItem  key={label} alternateLabel={alternateLabel}  >{label}</PlayListContextMenuItem>
             ))}
         </ul>
     )

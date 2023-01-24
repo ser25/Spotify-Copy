@@ -1,18 +1,16 @@
 import {useLayoutEffect, useRef} from "react";
 
 const clickPosition = {x: null, y: null}
-function useContextMenuPosition(ref, isContextMenu) {
+function useContextMenuPosition(ref, isOpen) {
 
 
     useLayoutEffect(() => {
-        if (isContextMenu) {
+        if (isOpen) {
             updateContextMenuPosition()
         }
     })
 
     const updateContextMenuPosition = () => {
-        // contextMenuRef.current.style.top = `${clickPosition.y}px`
-        // contextMenuRef.current.style.left = `${clickPosition.x}px`
         updateContextMenuVerticalPosition();
         updateContextMenuHorizontalPosition();
     }
