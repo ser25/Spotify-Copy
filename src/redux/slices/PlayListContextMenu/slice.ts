@@ -39,8 +39,9 @@ const initialState = {
             label: 'Open in Desktop app'
         },
     ],
-    isContextMenuOpen: false,
-    isToastShown: false
+    isScrollWrapper: false, //for scroll wrapper
+    isToastShown: false,
+    albumUrl: ''
 
 
 }
@@ -50,16 +51,18 @@ export const PlayListContextMenuSlice = createSlice({
     name: 'playListContextMenu',
     initialState,
     reducers: {
-        setIsContextMenuOpen(state, action){
-            state.isContextMenuOpen = action.payload
+        setIsScrollWrapper(state, action){ //for scroll wrapper
+            state.isScrollWrapper = action.payload
         },
         setIsToastShown(state, action){
             state.isToastShown = action.payload
-            // state.isContextMenuOpen = false
+        },
+        setAlbumUrl(state, action){
+            state.albumUrl = action.payload
         }
     },
 })
 
-export const {setIsContextMenuOpen, setIsToastShown} = PlayListContextMenuSlice.actions
+export const {setIsScrollWrapper, setIsToastShown, setAlbumUrl} = PlayListContextMenuSlice.actions
 
 export default PlayListContextMenuSlice.reducer

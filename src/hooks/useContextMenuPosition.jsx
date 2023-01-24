@@ -1,6 +1,7 @@
 import {useLayoutEffect, useRef} from "react";
 
 const clickPosition = {x: null, y: null}
+
 function useContextMenuPosition(ref, isOpen) {
 
 

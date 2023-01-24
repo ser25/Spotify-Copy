@@ -11,17 +11,16 @@ import {
     selectPlayListContextMenu
 } from "../../redux/slices/PlayListContextMenu/selectors";
 import {
-    closeContextMenu,
+    closeContextMenu, setAlbumUrl,
     setIsContextMenu,
-    setIsContextMenuOpen,
+    setIsContextMenuOpen, setIsScrollWrapper,
     setIsToastShown
 } from "../../redux/slices/PlayListContextMenu/slice";
 import {useAppDispatch} from "../../redux/store";
 import useContextMenu from "../../hooks/useContextMenu";
-import Toast from "../Toast/Toast";
+import useShowToast from "../../hooks/useShowToast";
 
 
-const clickPosition = {x: null, y: null}
 const PlayList = ({title, url, singer, albumUrl}) => {
     const dispatch = useAppDispatch()
     const closeToastTimer = useRef();
@@ -38,6 +37,8 @@ const PlayList = ({title, url, singer, albumUrl}) => {
     useEffect(() => {
         function hideToast() {
             dispatch(setIsToastShown(false))
+            // dispatch(setAlbumUrl(''))
+
         }
         function openToast() {
 
@@ -45,9 +46,12 @@ const PlayList = ({title, url, singer, albumUrl}) => {
         }
         if (IsToastShown) {
             setIsOpen(false)
+            dispatch(setIsScrollWrapper(false))
             openToast()
         }
     })
+
+    // useShowToast()
 
 
     return (
@@ -67,7 +71,6 @@ const PlayList = ({title, url, singer, albumUrl}) => {
                 {isOpen && (<PlayListContextMenu menuItems={menuItems} ref={ref} albumUrl={albumUrl}/>)}
 
             </a>
-            {IsToastShown && <Toast albumUrl={albumUrl}/>}
         </>
 
     );

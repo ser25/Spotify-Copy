@@ -1,8 +1,7 @@
 import {useEffect, useLayoutEffect, useRef, useState} from "react";
 import {useAppDispatch} from "../redux/store";
-import {setIsContextMenuOpen} from "../redux/slices/PlayListContextMenu/slice";
+import {setIsScrollWrapper} from "../redux/slices/PlayListContextMenu/slice";
 import useContextMenuPosition from "./useContextMenuPosition";
-
 
 
 function useContextMenu() {
@@ -18,14 +17,14 @@ function useContextMenu() {
         function handleClickAway(event) {
             if (!ref.current.contains(event.target)) {
                 setIsOpen(false)
-                dispatch(setIsContextMenuOpen(false))
+                dispatch(setIsScrollWrapper(false))
             }
         }
 
         const handleEsc = (e) => {
             if (e.keyCode === 27) {
                 setIsOpen(false)
-                dispatch(setIsContextMenuOpen(false))
+                dispatch(setIsScrollWrapper(false))
             }
         }
 
@@ -43,12 +42,12 @@ function useContextMenu() {
 
         updateClickCoordinates(e.clientX, e.clientY)
         setIsOpen(true)
-        dispatch(setIsContextMenuOpen(true))
+        dispatch(setIsScrollWrapper(true))
 
 
     }
 
-    return { openContextMenu, isOpen, ref, setIsOpen}
+    return {openContextMenu, isOpen, ref, setIsOpen}
 }
 
 export default useContextMenu

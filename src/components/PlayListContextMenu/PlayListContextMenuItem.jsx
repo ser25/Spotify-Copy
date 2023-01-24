@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {useDispatch} from "react-redux";
-import {setIsContextMenuOpen, setIsToastShown} from "../../redux/slices/PlayListContextMenu/slice";
+import {setAlbumUrl, setIsContextMenuOpen, setIsToastShown} from "../../redux/slices/PlayListContextMenu/slice";
 import {selectIsToastShown} from "../../redux/slices/PlayListContextMenu/selectors";
 
 
@@ -11,6 +11,8 @@ const PlayListContextMenuItem = ({children: originalLabel, closePreviousSubmenuI
     function openToast(){
         if (alternateLabel){
             dispatch(setIsToastShown(true))
+            dispatch(setAlbumUrl(albumUrl))
+
         }
     }
 

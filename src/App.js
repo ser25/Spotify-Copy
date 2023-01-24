@@ -7,7 +7,9 @@ import {useEffect, useRef, useState} from "react";
 import {useSelector} from "react-redux";
 import {selectRegistration} from "./redux/slices/Registration/selectors";
 import {setToken} from "./redux/slices/Registration/slice";
-import {selectIsContextMenuOpen} from "./redux/slices/PlayListContextMenu/selectors";
+import {selectIsContextMenuOpen, selectIsToastShown} from "./redux/slices/PlayListContextMenu/selectors";
+import Toast from "./components/Toast/Toast";
+import useShowToast from "./hooks/useShowToast";
 
 function App() {
     const [registration, setRegistration] = useState(true)
@@ -15,7 +17,8 @@ function App() {
     const contentWrapperRef = useRef(null)
     const isScrollingEnable = useSelector(selectIsContextMenuOpen)
 
-    function handleScrolling(e){
+
+    function handleScrolling(e) {
         if (!isScrollingEnable) return
 
         e.preventDefault()
@@ -32,6 +35,8 @@ function App() {
             contentWrapper.removeEventListener('mousewheel', handleScrolling)
         }
     })
+    // useShowToast()
+
     return (
         <>
             <div className="flex grow overflow-auto">
@@ -43,6 +48,7 @@ function App() {
                 </div>
             </div>
             {/*{registrationRef.current && <TheRegistration setRegistration={setRegistration}/>}*/}
+            <Toast>Link copied to clipboard</Toast>
 
         </>
     )
