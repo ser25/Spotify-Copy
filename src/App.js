@@ -42,7 +42,7 @@ function App() {
                     <TheMain/>
                 </div>
             </div>
-            {registrationRef.current && <TheRegistration setRegistration={setRegistration}/>}
+            {/*{registrationRef.current && <TheRegistration setRegistration={setRegistration}/>}*/}
 
         </>
     )

@@ -6,7 +6,7 @@ import PlayListContextMenuItem from "./PlayListContextMenuItem";
 import {closeContextMenu} from "../../redux/slices/PlayListContextMenu/slice";
 import PlayListContextMenuItemWithSubmenu from "./PlayListContextMenuItemWithSubmenu";
 
-const PlayListContextMenu = (_, ref) => {
+const PlayListContextMenu = ({menuItems}, ref) => {
     let closePreviousSubmenu = null;
 
     function closePreviousSubmenuIfOpen(closeSubmenu = null) {
@@ -16,7 +16,7 @@ const PlayListContextMenu = (_, ref) => {
 
         closePreviousSubmenu = closeSubmenu;
     }
-    const menuItems = useSelector(selectPlayListContextMenu)
+    // const menuItems = useSelector(selectPlayListContextMenu)
     return (
         <ul className="fixed bg-[#282828] text-[#eaeaea]
                 text-sm divide-y divide-[#3e3e3e] p-1 rounded shadow-xl cursor-default whitespace-nowrap z-10"
