@@ -13,12 +13,11 @@ import useShowToast from "./hooks/useShowToast";
 import Popover from "./components/Popover/Popover";
 
 function App() {
-    const [registration, setRegistration] = useState(true)
+    const [registration, setRegistration] = useState(false)
     const registrationRef = useRef(registration)
     const contentWrapperRef = useRef(null)
     const popoverRef = useRef()
     const isScrollingEnable = useSelector(selectIsContextMenuOpen)
-
 
     function handleScrolling(e) {
         if (!isScrollingEnable) return
@@ -40,21 +39,21 @@ function App() {
 
     // useShowToast()
 
-    function showPopover() {
-        popoverRef.current.show();
-    }
+    // function showPopover() {
+    //     // popoverRef.current.show();
+    // }
 
     return (
         <>
             <div className="flex grow overflow-auto">
-                <TheSidebar showPopover={showPopover}/>
+                <TheSidebar showPopover={''}/>
                 <TheSidebarOverlay/>
                 <div className="flex-1 overflow-auto" ref={contentWrapperRef}>
                     <TheHeader/>
                     <TheMain/>
                 </div>
             </div>
-            {/*{registrationRef.current && <TheRegistration setRegistration={setRegistration}/>}*/}
+            {registrationRef.current && <TheRegistration setRegistration={setRegistration}/>}
             <Toast>Link copied to clipboard</Toast>
             <Popover ref={popoverRef}/>
 

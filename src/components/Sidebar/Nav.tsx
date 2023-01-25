@@ -8,8 +8,11 @@ import {
 } from '@heroicons/react/24/outline'
 import NavItem from "./NavItem";
 import {INavItems} from './type/index'
+import {useDispatch} from "react-redux";
+import {show} from "../../redux/slices/Popover/slice";
 
 const Nav: FC<any> = ({showPopover}) => {
+    const dispatch = useDispatch()
     const activeNavItemsClasses = "flex items-center text-white bg-[#282828] mx-2 px-4 py-2 rounded"
     const navItemClasses = "flex items-center hover:text-white mx-2 px-4 py-2 rounded duration-300"
     const navItems: INavItems[] = [
@@ -35,7 +38,7 @@ const Nav: FC<any> = ({showPopover}) => {
             label: 'Create Playlist',
             classes: navItemClasses,
             icon: <PlusCircleIcon className="w-6 h-6"/>,
-            action: showPopover
+            // action: showPopover
 
         },
         {
@@ -45,10 +48,17 @@ const Nav: FC<any> = ({showPopover}) => {
 
         },
     ]
+
+    function openPopover (label: string){
+        if ('Create Playlist' !== label) return
+        dispatch(show())
+
+    }
+
     return (
         <nav>
             {navItems.map(navItem =>
-                <NavItem key={navItem.label} navItem={navItem} onClick={navItem.action}/>
+                <NavItem key={navItem.label} navItem={navItem} onClick={openPopover}/>
             )}
         </nav>
     );

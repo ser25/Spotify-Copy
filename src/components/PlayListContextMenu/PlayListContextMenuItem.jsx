@@ -2,14 +2,19 @@ import React, {useEffect, useRef, useState} from 'react';
 import {useDispatch} from "react-redux";
 import {setAlbumUrl, setIsContextMenuOpen, setIsToastShown} from "../../redux/slices/PlayListContextMenu/slice";
 import {selectIsToastShown} from "../../redux/slices/PlayListContextMenu/selectors";
+import {show} from "../../redux/slices/Popover/slice";
 
 
 const PlayListContextMenuItem = ({children: originalLabel, closePreviousSubmenuIfOpen, alternateLabel, albumUrl}) => {
     const dispatch = useDispatch()
 
 
-    function openToast(){
-        if (alternateLabel){
+    function openToast() {
+
+        if (originalLabel === 'Add to Your Library') {
+            dispatch(show())
+        }
+        if (alternateLabel) {
             dispatch(setIsToastShown(true))
             dispatch(setAlbumUrl(albumUrl))
 
@@ -41,7 +46,6 @@ const PlayListContextMenuItem = ({children: originalLabel, closePreviousSubmenuI
             document.removeEventListener('keyup', handleAltKeyup);
         };
     }, []);
-
 
 
     return (

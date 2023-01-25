@@ -1,6 +1,6 @@
 import React from 'react';
 
-const BaseButton = ({children:label, primary, onClick: handClick}) => {
+const BaseButton = ({children: label, primary, onClick: handClick}) => {
     const typeClasses = primary ? 'bg-white hover:bg-gray-100 text-[#2e2e2e]' : 'text-white';
     return (
         <>

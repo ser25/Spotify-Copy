@@ -6,7 +6,7 @@ import useContextMenu from "../../../hooks/useContextMenu";
 const initialState = {
     menuItems: [
         {
-            label: ' Add to Your Library'
+            label: 'Add to Your Library'
         },
         {
             label: 'Share',
