@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import {ChevronLeftIcon, ChevronRightIcon, Bars3Icon } from '@heroicons/react/24/outline';
-import ButtonLogin from "./ButtonLogin";
-import ButtonRegister from "./ButtonRegister";
+import ButtonLogin from "../../UI/BaseButton/ButtonLogin";
+import ButtonRegister from "../../UI/BaseButton/ButtonRegister";
 
 const TheHeader: FC = () => {
     return (

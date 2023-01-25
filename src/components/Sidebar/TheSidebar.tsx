@@ -5,7 +5,7 @@ import Footer from "./Footer";
 import PlayListContextMenu from "../PlayListContextMenu/PlayListContextMenu";
 import useContextMenu from "../../hooks/useContextMenu";
 
-const TheSidebar: FC = () => {
+const TheSidebar: FC<any> = ({showPopover}) => {
     return (
         <aside
             id="sidebar"
@@ -13,7 +13,7 @@ const TheSidebar: FC = () => {
             // onContextMenu={openContextMenu}
         >
             <Logo/>
-            <Nav/>
+            <Nav showPopover={showPopover}/>
             <Footer/>
             {/*{isContextMenu && (<PlayListContextMenu ref={contextMenuRef}/>)}*/}
         </aside>

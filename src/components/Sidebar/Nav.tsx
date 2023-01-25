@@ -9,7 +9,7 @@ import {
 import NavItem from "./NavItem";
 import {INavItems} from './type/index'
 
-const Nav: FC = () => {
+const Nav: FC<any> = ({showPopover}) => {
     const activeNavItemsClasses = "flex items-center text-white bg-[#282828] mx-2 px-4 py-2 rounded"
     const navItemClasses = "flex items-center hover:text-white mx-2 px-4 py-2 rounded duration-300"
     const navItems: INavItems[] = [
@@ -35,6 +35,7 @@ const Nav: FC = () => {
             label: 'Create Playlist',
             classes: navItemClasses,
             icon: <PlusCircleIcon className="w-6 h-6"/>,
+            action: showPopover
 
         },
         {
@@ -47,7 +48,7 @@ const Nav: FC = () => {
     return (
         <nav>
             {navItems.map(navItem =>
-                <NavItem key={navItem.label} navItem={navItem}/>
+                <NavItem key={navItem.label} navItem={navItem} onClick={navItem.action}/>
             )}
         </nav>
     );
