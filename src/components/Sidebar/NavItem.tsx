@@ -8,7 +8,8 @@ const NavItem: FC<NavItemProps> = ({navItem, onClick}) => {
 
         event.preventDefault();
 
-        onClick(navItem.label);
+
+        onClick(navItem.titlePopover, navItem.textPopover, event.currentTarget);
     }
 
     return (

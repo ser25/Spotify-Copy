@@ -9,7 +9,8 @@ import {
 import NavItem from "./NavItem";
 import {INavItems} from './type/index'
 import {useDispatch} from "react-redux";
-import {show} from "../../redux/slices/Popover/slice";
+import {setCoordinate, setText, setTitle, show} from "../../redux/slices/Popover/slice";
+import * as events from "events";
 
 const Nav: FC<any> = ({showPopover}) => {
     const dispatch = useDispatch()
@@ -32,6 +33,9 @@ const Nav: FC<any> = ({showPopover}) => {
             label: 'Your liberty',
             classes: `${navItemClasses} mb-6`,
             icon: <BuildingLibraryIcon className="w-6 h-6"/>,
+            titlePopover: 'Enjoy Your Library',
+            textPopover: 'Log in to see saved songs, podcasts, artists, and playlists in Your Library.'
+
 
         },
         {
@@ -39,18 +43,33 @@ const Nav: FC<any> = ({showPopover}) => {
             classes: navItemClasses,
             icon: <PlusCircleIcon className="w-6 h-6"/>,
             // action: showPopover
+            titlePopover: 'Create a playlist',
+            textPopover: 'Log in to create and share playlists.'
 
         },
         {
             label: 'Liked Songs',
             classes: navItemClasses,
             icon: <HeartIcon className="w-6 h-6"/>,
+            titlePopover: 'Enjoy your Liked Songs',
+            textPopover: 'Log in to see all the songs you\'ve liked in one easy playlist.'
 
         },
     ]
 
-    function openPopover (label: string){
-        if ('Create Playlist' !== label) return
+    function getCoordinate(target: any){
+        const { top, right, height } = target.getBoundingClientRect();
+        return { top, right, height }
+    }
+
+
+    function openPopover(title: string, text: string, target: events) {
+        if (title === undefined) return
+        const { top, right, height } = getCoordinate(target)
+        console.log({ top, right, height })
+        dispatch(setCoordinate({ top, right, height }))
+        dispatch(setTitle(title))
+        dispatch(setText(text))
         dispatch(show())
 
     }

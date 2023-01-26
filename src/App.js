@@ -15,7 +15,7 @@ import Popover from "./components/Popover/Popover";
 function App() {
     const [registration, setRegistration] = useState(false)
     const registrationRef = useRef(registration)
-    const contentWrapperRef = useRef(null)
+    const contentWrapperRef = useRef()
     const popoverRef = useRef()
     const isScrollingEnable = useSelector(selectIsContextMenuOpen)
 
@@ -61,4 +61,4 @@ function App() {
     )
 }
 
-export default App;
+export default App

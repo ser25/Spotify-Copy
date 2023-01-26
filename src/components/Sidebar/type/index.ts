@@ -5,6 +5,8 @@ export interface INavItems {
     classes: string,
     icon: JSX.Element
     action?: any
+    titlePopover?: string
+    textPopover?: string
 }
 
 export interface NavItemProps {
