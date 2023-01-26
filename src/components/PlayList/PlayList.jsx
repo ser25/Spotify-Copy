@@ -19,6 +19,7 @@ import {
 import {useAppDispatch} from "../../redux/store";
 import useContextMenu from "../../hooks/useContextMenu";
 import useShowToast from "../../hooks/useShowToast";
+import {selectPopover} from "../../redux/slices/Popover/selectors";
 
 
 const PlayList = ({title, url, singer, albumUrl}) => {
@@ -26,13 +27,18 @@ const PlayList = ({title, url, singer, albumUrl}) => {
     const closeToastTimer = useRef();
     const menuItems = useSelector(selectPlayListContextMenu)
     const IsToastShown = useSelector(selectIsToastShown)
-
+    const openPopover = useSelector(selectPopover)
     const {openContextMenu, isOpen, ref, setIsOpen} = useContextMenu()
 
 
     const bgClasses = isOpen ? 'bg-[#272727]' : 'bg-[#181818] hover:bg-[#272727]'
 
 
+    useEffect(() =>{
+        if (openPopover === 'opacity-1' && isOpen){
+            setIsOpen(false)
+        }
+    }, [openPopover])
 
     useEffect(() => {
         function hideToast() {
@@ -51,7 +57,6 @@ const PlayList = ({title, url, singer, albumUrl}) => {
         }
     })
 
-    // useShowToast()
 
 
     return (

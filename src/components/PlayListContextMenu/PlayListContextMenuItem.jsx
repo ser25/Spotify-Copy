@@ -8,11 +8,11 @@ import {show} from "../../redux/slices/Popover/slice";
 const PlayListContextMenuItem = ({children: originalLabel, closePreviousSubmenuIfOpen, alternateLabel, albumUrl}) => {
     const dispatch = useDispatch()
 
-
     function openToast() {
 
         if (originalLabel === 'Add to Your Library') {
             dispatch(show())
+
         }
         if (alternateLabel) {
             dispatch(setIsToastShown(true))
