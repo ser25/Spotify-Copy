@@ -1,28 +1,28 @@
-import React, {forwardRef, useEffect, useImperativeHandle, useRef, useState} from 'react';
+import React, {forwardRef, useEffect, useRef} from 'react';
 import ButtonLogin from "../../UI/BaseButton/ButtonLogin";
 import BaseButton from "../../UI/BaseButton/BaseButton";
 import {useDispatch, useSelector} from "react-redux";
 import {selectPopover, selectPopoverAll} from "../../redux/slices/Popover/selectors";
-import {hide, setTitle} from "../../redux/slices/Popover/slice";
+import {hide} from "../../redux/slices/Popover/slice";
 
-const Popover = forwardRef((_, ref) => {
-    // const [classes, setClasses] = useState('opacity-0 pointer-events-none')
+const Popover = () => {
     const dispatch = useDispatch()
     const classes = useSelector(selectPopover)
     const nodeRef = useRef();
-    const {title, text, top, right} = useSelector(selectPopoverAll)
+    const {title, text, top, right, height, label} = useSelector(selectPopoverAll)
 
-    // useEffect(() => {
-    //     if (classes === 'opacity-1') {
-    //         // console.log(title)
-    //         // dispatch(setTitle('ok)'))
-    //     }
-    // }, [classes])
 
     useEffect(() => {
-        function handleClickAway({target}) {
+        function handleClickAway(e) {
             if (classes === 'opacity-1') {
-                if (!nodeRef.current.contains(target)) dispatch(hide());
+                if (!nodeRef.current.contains(e.target)) {
+                    if (label === e.target.innerHTML) {
+                        return
+                    }
+                    dispatch(hide())
+
+
+                }
             }
 
         }
@@ -39,12 +39,14 @@ const Popover = forwardRef((_, ref) => {
     }
 
     function moveTO() {
-        nodeRef.current.style.top = `${top}px`;
-        nodeRef.current.style.left = `${right}px`;
+
+        nodeRef.current.style.top = `${top - (height / 3) * 2}px`;
+        nodeRef.current.style.left = `${right + 30}px`;
     }
 
     useEffect(() => {
         if (classes === 'opacity-1') {
+
             moveTO()
         }
     }, [top, right])
@@ -68,6 +70,6 @@ const Popover = forwardRef((_, ref) => {
             </div>
         </div>
     );
-})
+}
 
 export default Popover;

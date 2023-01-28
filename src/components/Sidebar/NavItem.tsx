@@ -1,15 +1,14 @@
-import React, {FC} from 'react';
+import React, {FC, useRef} from 'react';
 import {NavItemProps} from "./type/index";
 
 
 const NavItem: FC<NavItemProps> = ({navItem, onClick}) => {
+    const spanRef: any = useRef()
     function handleClick(event: any) {
         if (!onClick) return;
+        event.preventDefault()
 
-        event.preventDefault();
-
-
-        onClick(navItem.titlePopover, navItem.textPopover, event.currentTarget);
+        onClick(navItem.titlePopover, navItem.textPopover, spanRef.current, navItem.label);
     }
 
     return (
@@ -19,7 +18,7 @@ const NavItem: FC<NavItemProps> = ({navItem, onClick}) => {
             onClick={handleClick}
         >
             {navItem.icon}
-            <span className="ml-4 text-sm font-semibold">{navItem.label}</span>
+            <span ref={spanRef} className="ml-4 text-sm font-semibold">{navItem.label}</span>
         </a>
     );
 };

@@ -5,6 +5,7 @@ const initialState = {
     classes: 'opacity-0 translate-x-1 pointer-events-none',
     title: '',
     text: '',
+    label: '',
     top: 0,
     right: 0,
     height: 0,
@@ -14,10 +15,16 @@ export const PopoverSlice = createSlice({
     name: 'popover',
     initialState,
     reducers: {
+        setLabel(state, action){
+            state.label = action.payload
+        },
         show(state){
             state.classes = 'opacity-1'
         },
         hide(state){
+            // if (state.title === action.payload){
+            //
+            // }
             state.classes = 'opacity-0 translate-x-1 pointer-events-none'
         },
         setTitle(state, action){
@@ -34,6 +41,6 @@ export const PopoverSlice = createSlice({
     },
 })
 
-export const {show, hide, setTitle, setText, setCoordinate} = PopoverSlice.actions
+export const {show, hide, setTitle, setText, setCoordinate, setLabel} = PopoverSlice.actions
 
 export default PopoverSlice.reducer

@@ -1,6 +1,11 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {useDispatch} from "react-redux";
-import {setAlbumUrl, setIsContextMenuOpen, setIsToastShown} from "../../redux/slices/PlayListContextMenu/slice";
+import {
+    setAlbumUrl,
+    setIsContextMenuOpen,
+    setIsScrollWrapper,
+    setIsToastShown
+} from "../../redux/slices/PlayListContextMenu/slice";
 import {selectIsToastShown} from "../../redux/slices/PlayListContextMenu/selectors";
 import {setCoordinate, setText, setTitle, show} from "../../redux/slices/Popover/slice";
 
@@ -13,8 +18,8 @@ const PlayListContextMenuItem = ({children: originalLabel, closePreviousSubmenuI
         if (originalLabel === 'Add to Your Library') {
             dispatch(setTitle('Enjoy Your Library'))
             dispatch(setText('Log in to see saved songs, podcasts, artists, and playlists in Your Library.'))
-            dispatch(setCoordinate({top: 166.96875, right: 248, height: 40}))
-            dispatch(setIsToastShown(true))
+            dispatch(setCoordinate({top: 176.96875, right: 137.34375, height: 20}))
+            dispatch(setIsScrollWrapper(false))
             dispatch(show())
         }
         if (alternateLabel) {

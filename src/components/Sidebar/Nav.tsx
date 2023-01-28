@@ -8,9 +8,9 @@ import {
 } from '@heroicons/react/24/outline'
 import NavItem from "./NavItem";
 import {INavItems} from './type/index'
-import {useDispatch} from "react-redux";
-import {setCoordinate, setText, setTitle, show} from "../../redux/slices/Popover/slice";
-import * as events from "events";
+import {useDispatch, useSelector} from "react-redux";
+import {setCoordinate, setText, setTitle, setLabel, show} from "../../redux/slices/Popover/slice";
+import {selectPopoverAll} from "../../redux/slices/Popover/selectors";
 
 const Nav: FC<any> = ({showPopover}) => {
     const dispatch = useDispatch()
@@ -57,17 +57,19 @@ const Nav: FC<any> = ({showPopover}) => {
         },
     ]
 
-    function getCoordinate(target: any){
-        const { top, right, height } = target.getBoundingClientRect();
-        return { top, right, height }
+    function getCoordinate(target: any) {
+        const {top, right, height} = target.getBoundingClientRect();
+        return {top, right, height}
     }
 
+    const {title: titlePopoverTwo}: any = useSelector(selectPopoverAll)
 
-    function openPopover(title: string, text: string, target: events) {
+    function openPopover(title: string, text: string, target: any, label: string) {
         if (title === undefined) return
-        const { top, right, height } = getCoordinate(target)
-        console.log({ top, right, height })
-        dispatch(setCoordinate({ top, right, height }))
+        target.setAttribute('id', `${label}`)
+        dispatch(setLabel(label))
+        const {top, right, height} = getCoordinate(target)
+        dispatch(setCoordinate({top, right, height}))
         dispatch(setTitle(title))
         dispatch(setText(text))
         dispatch(show())
