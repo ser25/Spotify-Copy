@@ -20,9 +20,12 @@ import {useAppDispatch} from "../../redux/store";
 import useContextMenu from "../../hooks/useContextMenu";
 import useShowToast from "../../hooks/useShowToast";
 import {selectPopover} from "../../redux/slices/Popover/selectors";
+import {selectModal} from "../../redux/slices/Modal/selectors";
+import Modal from "../../UI/Modal/Modal";
 
 
 const PlayList = ({title, url, singer, albumUrl}) => {
+
     const dispatch = useAppDispatch()
     const closeToastTimer = useRef();
     const menuItems = useSelector(selectPlayListContextMenu)
@@ -34,8 +37,8 @@ const PlayList = ({title, url, singer, albumUrl}) => {
     const bgClasses = isOpen ? 'bg-[#272727]' : 'bg-[#181818] hover:bg-[#272727]'
 
 
-    useEffect(() =>{
-        if (openPopover === 'opacity-1' && isOpen){
+    useEffect(() => {
+        if (openPopover === 'opacity-1' && isOpen) {
             setIsOpen(false)
         }
     }, [openPopover])
@@ -46,17 +49,18 @@ const PlayList = ({title, url, singer, albumUrl}) => {
             // dispatch(setAlbumUrl(''))
 
         }
+
         function openToast() {
 
             closeToastTimer.current = setTimeout(hideToast, 1000);
         }
+
         if (IsToastShown) {
             setIsOpen(false)
             dispatch(setIsScrollWrapper(false))
             openToast()
         }
     })
-
 
 
     return (
@@ -76,7 +80,10 @@ const PlayList = ({title, url, singer, albumUrl}) => {
                 {isOpen && (<PlayListContextMenu menuItems={menuItems} ref={ref} albumUrl={albumUrl}
                                                  setIsOpen={setIsOpen} isOpen={isOpen}/>)}
 
+
             </a>
+
+
         </>
 
     );

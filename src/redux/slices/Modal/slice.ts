@@ -1,28 +1,37 @@
 import {createSlice} from '@reduxjs/toolkit'
 import type {PayloadAction} from '@reduxjs/toolkit'
+import ModalRecommendation from "../../../components/ModalRecommendation/ModalRecommendation";
 
 export interface CounterState {
-    isOpen: boolean
+    isOpenRecommendation: boolean
+    isOpenEmbed: boolean
 }
 
 const initialState: CounterState = {
-    isOpen: false,
+    isOpenRecommendation: false,
+    isOpenEmbed: false
 }
 
 export const modalSlice = createSlice({
     name: 'modal',
     initialState,
     reducers: {
-        openModal(state) {
-            state.isOpen = true
+        openModalRecommendation(state) {
+            state.isOpenRecommendation = true
         },
-        closeModal(state) {
-            state.isOpen = false
-        }
+        closeModalRecommendation(state) {
+            state.isOpenRecommendation = false
+        },
+        openModalEmbed(state) {
+            state.isOpenEmbed = true
+        },
+        closeModalEmbed(state) {
+            state.isOpenEmbed = false
+        },
     },
 })
 
 
-export const {openModal, closeModal} = modalSlice.actions
+export const {openModalRecommendation, closeModalRecommendation, openModalEmbed, closeModalEmbed} = modalSlice.actions
 
 export default modalSlice.reducer

@@ -6,7 +6,7 @@ import {
     setIsToastShown
 } from "../../redux/slices/PlayListContextMenu/slice";
 import {setCoordinate, setText, setTitle, show} from "../../redux/slices/Popover/slice";
-import {openModal} from "../../redux/slices/Modal/slice";
+import {closeModalEmbed, openModalEmbed, openModalRecommendation} from "../../redux/slices/Modal/slice";
 
 
 const PlayListContextMenuItem = ({
@@ -29,8 +29,11 @@ const PlayListContextMenuItem = ({
         } else if (originalLabel === 'About recommendations') {
             dispatch(setIsScrollWrapper(false))
             setIsOpen(false)
-            dispatch(openModal())
-        }
+            dispatch(openModalRecommendation())
+        }else if (originalLabel === 'Embed playlist'){
+            dispatch(setIsScrollWrapper(false))
+            dispatch(openModalEmbed())
+            }
         if (alternateLabel) {
             dispatch(setIsToastShown(true))
             dispatch(setAlbumUrl(albumUrl))

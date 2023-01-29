@@ -21,6 +21,4 @@ if (rootElement) {
 }
 
 
-
-
 reportWebVitals();
