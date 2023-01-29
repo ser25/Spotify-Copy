@@ -2,6 +2,7 @@ import {useEffect, useLayoutEffect, useRef, useState} from "react";
 import {useAppDispatch} from "../redux/store";
 import {setIsScrollWrapper} from "../redux/slices/PlayListContextMenu/slice";
 import useContextMenuPosition from "./useContextMenuPosition";
+import useEvent from "./useEvent";
 
 
 function useContextMenu() {
@@ -21,21 +22,24 @@ function useContextMenu() {
             }
         }
 
-        const handleEsc = (e) => {
-            if (e.keyCode === 27) {
-                setIsOpen(false)
-                dispatch(setIsScrollWrapper(false))
-            }
-        }
 
         document.addEventListener('mousedown', handleClickAway)
-        document.addEventListener('keydown', handleEsc)
+        // document.addEventListener('keydown', handleEsc)
 
         return () => {
             document.removeEventListener('mousedown', handleClickAway)
-            document.removeEventListener('keydown', handleEsc)
+            // document.removeEventListener('keydown', handleEsc)
         }
     })
+
+    const handleEsc = (e) => {
+        if (e.keyCode === 27) {
+            setIsOpen(false)
+            dispatch(setIsScrollWrapper(false))
+        }
+    }
+
+    useEvent('keydown', handleEsc, ()=> isOpen)
 
     const openContextMenu = (e) => {
         e.preventDefault()

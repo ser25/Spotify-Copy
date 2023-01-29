@@ -11,37 +11,26 @@ import {selectIsContextMenuOpen, selectIsToastShown} from "./redux/slices/PlayLi
 import Toast from "./components/Toast/Toast";
 import useShowToast from "./hooks/useShowToast";
 import Popover from "./components/Popover/Popover";
+import Modal from "./components/Modal/Modal";
+import {selectModal} from "./redux/slices/Modal/selectors";
+import useEvent from "./hooks/useEvent";
 
 function App() {
     const [registration, setRegistration] = useState(false)
+    const {isOpen: isModalOpen} = useSelector(selectModal)
     const registrationRef = useRef(registration)
     const contentWrapperRef = useRef()
-    const popoverRef = useRef()
     const isScrollingEnable = useSelector(selectIsContextMenuOpen)
 
     function handleScrolling(e) {
         if (!isScrollingEnable) return
-
         e.preventDefault()
         e.stopPropagation()
     }
 
-    useEffect(() => {
 
-        const contentWrapper = contentWrapperRef.current
+    useEvent('mousewheel', handleScrolling, () => isScrollingEnable, contentWrapperRef.current)
 
-        contentWrapper.addEventListener('mousewheel', handleScrolling)
-
-        return () => {
-            contentWrapper.removeEventListener('mousewheel', handleScrolling)
-        }
-    })
-
-    // useShowToast()
-
-    // function showPopover() {
-    //     // popoverRef.current.show();
-    // }
 
     return (
         <>
@@ -55,7 +44,8 @@ function App() {
             </div>
             {registrationRef.current && <TheRegistration setRegistration={setRegistration}/>}
             <Toast>Link copied to clipboard</Toast>
-            <Popover ref={popoverRef}/>
+            <Popover/>
+            {isModalOpen && <Modal/>}
 
         </>
     )

@@ -6,7 +6,7 @@ import PlayListContextMenuItem from "./PlayListContextMenuItem";
 import {closeContextMenu} from "../../redux/slices/PlayListContextMenu/slice";
 import PlayListContextMenuItemWithSubmenu from "./PlayListContextMenuItemWithSubmenu";
 
-const PlayListContextMenu = ({menuItems, albumUrl}, ref) => {
+const PlayListContextMenu = ({menuItems, albumUrl, setIsOpen, isOpen}, ref) => {
     let closePreviousSubmenu = null;
 
     function closePreviousSubmenuIfOpen(closeSubmenu = null) {
@@ -36,7 +36,10 @@ const PlayListContextMenu = ({menuItems, albumUrl}, ref) => {
                         )
                     } else {
                         return (
-                            <PlayListContextMenuItem key={menuItem.label} closePreviousSubmenuIfOpen={closePreviousSubmenuIfOpen}
+                            <PlayListContextMenuItem key={menuItem.label}
+                                                     closePreviousSubmenuIfOpen={closePreviousSubmenuIfOpen}
+                                                     setIsOpen={setIsOpen}
+                                                     isOpen={isOpen}
                             >
                                 {menuItem.label}
                             </PlayListContextMenuItem>

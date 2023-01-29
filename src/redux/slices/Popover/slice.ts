@@ -22,9 +22,6 @@ export const PopoverSlice = createSlice({
             state.classes = 'opacity-1'
         },
         hide(state){
-            // if (state.title === action.payload){
-            //
-            // }
             state.classes = 'opacity-0 translate-x-1 pointer-events-none'
         },
         setTitle(state, action){
@@ -37,10 +34,17 @@ export const PopoverSlice = createSlice({
             state.top = action.payload.top
             state.right = action.payload.right
             state.height = action.payload.height
+        },
+        clearPopover(state){
+            state.top = 0
+            state.right = 0
+            state.height = 0
+            state.title = ''
+            state.text = ''
         }
     },
 })
 
-export const {show, hide, setTitle, setText, setCoordinate, setLabel} = PopoverSlice.actions
+export const {show, hide, setTitle, setText, setCoordinate, setLabel, clearPopover} = PopoverSlice.actions
 
 export default PopoverSlice.reducer

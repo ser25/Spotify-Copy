@@ -3,12 +3,14 @@ import {useDispatch} from 'react-redux'
 import playListContextMenu from "./slices/PlayListContextMenu/slice";
 import registration from './slices/Registration/slice'
 import popover from './slices/Popover/slice'
+import modal from './slices/Modal/slice'
 
 export const store = configureStore({
     reducer: {
         playListContextMenu,
         registration,
-        popover
+        popover,
+        modal
     },
 })
 

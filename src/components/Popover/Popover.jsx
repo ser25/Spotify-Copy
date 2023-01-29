@@ -1,55 +1,11 @@
 import React, {forwardRef, useEffect, useRef} from 'react';
 import ButtonLogin from "../../UI/BaseButton/ButtonLogin";
 import BaseButton from "../../UI/BaseButton/BaseButton";
-import {useDispatch, useSelector} from "react-redux";
-import {selectPopover, selectPopoverAll} from "../../redux/slices/Popover/selectors";
-import {hide} from "../../redux/slices/Popover/slice";
+import useClickAwayPopover from "../../hooks/useClickAwayPopover";
 
 const Popover = () => {
-    const dispatch = useDispatch()
-    const classes = useSelector(selectPopover)
-    const nodeRef = useRef();
-    const {title, text, top, right, height, label} = useSelector(selectPopoverAll)
 
-
-    useEffect(() => {
-        function handleClickAway(e) {
-            if (classes === 'opacity-1') {
-                if (!nodeRef.current.contains(e.target)) {
-                    if (label === e.target.innerHTML) {
-                        return
-                    }
-                    dispatch(hide())
-
-
-                }
-            }
-
-        }
-
-        document.addEventListener('mousedown', handleClickAway);
-
-        return () => document.removeEventListener('mousedown', handleClickAway);
-    });
-
-
-    function hidePopover() {
-        dispatch(hide())
-
-    }
-
-    function moveTO() {
-
-        nodeRef.current.style.top = `${top - (height / 3) * 2}px`;
-        nodeRef.current.style.left = `${right + 30}px`;
-    }
-
-    useEffect(() => {
-        if (classes === 'opacity-1') {
-
-            moveTO()
-        }
-    }, [top, right])
+    const {classes, nodeRef, title, text, hidePopover} = useClickAwayPopover()
 
 
     return (

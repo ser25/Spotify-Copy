@@ -73,7 +73,8 @@ const PlayList = ({title, url, singer, albumUrl}) => {
                 </div>
                 <PlayListTitle title={title}/>
                 <PlayListDescription singer={singer}/>
-                {isOpen && (<PlayListContextMenu menuItems={menuItems} ref={ref} albumUrl={albumUrl}/>)}
+                {isOpen && (<PlayListContextMenu menuItems={menuItems} ref={ref} albumUrl={albumUrl}
+                                                 setIsOpen={setIsOpen} isOpen={isOpen}/>)}
 
             </a>
         </>
