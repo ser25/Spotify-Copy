@@ -20,7 +20,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Albums from "./pages/Albums/Albums";
 
 function App() {
-    const [registration, setRegistration] = useState(false)
+    const [registration, setRegistration] = useState(true)
     const {isOpenRecommendation, isOpenEmbed} = useSelector(selectModal)
     const registrationRef = useRef(registration)
     const contentWrapperRef = useRef()
