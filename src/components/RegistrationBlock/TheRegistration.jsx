@@ -3,7 +3,7 @@ import RegistrationInfo from "./RegistrationInfo";
 import RegistrationButton from "./RegistrationButton";
 import {AUTH_ENDPOINT, CLIENT_ID, REDIRECT_URI, RESPONSE_TYPE} from "../../key";
 import {useDispatch} from "react-redux";
-import {setToken} from "../../redux/slices/Registration/slice";
+import {setToken} from "../../redux/slices/Token/slice";
 
 
 const TheRegistration = ({setRegistration}) => {

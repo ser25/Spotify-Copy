@@ -1,9 +1,14 @@
-import React, {FC} from 'react';
-import {ChevronLeftIcon, ChevronRightIcon, Bars3Icon } from '@heroicons/react/24/outline';
+import React, {FC, useEffect} from 'react';
+import {ChevronLeftIcon, ChevronRightIcon, Bars3Icon} from '@heroicons/react/24/outline';
 import ButtonLogin from "../../UI/BaseButton/ButtonLogin";
 import ButtonRegister from "../../UI/BaseButton/ButtonRegister";
+import {useDispatch, useSelector} from "react-redux";
+import {selectToken} from "../../redux/slices/Token/selectors";
+import {fetchMeInformation} from "../../redux/slices/Token/slice";
 
-const TheHeader: FC = () => {
+const TheHeader = () => {
+    // const dispatch = useDispatch()
+    const {me: user} = useSelector(selectToken)
     return (
         <header
             className="bg-[#070707] flex-1 flex justify-between items-center py-[10px] px-[13px] sm:px-[32px] sticky top-0 z-10">
@@ -21,10 +26,17 @@ const TheHeader: FC = () => {
                     <ChevronRightIcon className='h-6 w-6'/>
                 </a>
             </div>
-            <div>
-                <ButtonRegister />
-                <ButtonLogin />
+            {user ? <div className={'text-white'}>
+                    <a href={user?.external_urls?.spotify} target="_blank">{user?.display_name}</a>
+
             </div>
+                :
+                <div>
+                    <ButtonRegister/>
+                    <ButtonLogin/>
+                </div>
+            }
+
         </header>
     );
 };

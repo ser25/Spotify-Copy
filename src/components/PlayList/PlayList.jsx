@@ -62,6 +62,11 @@ const PlayList = ({title, url, singer, albumUrl}) => {
         }
     })
 
+    function handleClick(e){
+        e.preventDefault()
+        console.log('click')
+    }
+
 
     return (
         <>
@@ -69,7 +74,7 @@ const PlayList = ({title, url, singer, albumUrl}) => {
                 href="/"
                 className={`relative p-4 rounded-md  duration-200 group ${bgClasses}`}
                 onContextMenu={openContextMenu}
-                onClick={event => event.preventDefault()}
+                onClick={handleClick}
             >
                 <div className="relative">
                     <PlayListCover url={url}/>

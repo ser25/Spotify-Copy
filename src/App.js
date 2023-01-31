@@ -5,8 +5,8 @@ import TheRegistration from "./components/RegistrationBlock/TheRegistration";
 import TheSidebarOverlay from "./components/TheSidebarOverlay";
 import React, {useEffect, useRef, useState} from "react";
 import {useSelector} from "react-redux";
-import {selectRegistration} from "./redux/slices/Registration/selectors";
-import {setToken} from "./redux/slices/Registration/slice";
+import {selectRegistration} from "./redux/slices/Token/selectors";
+import {setToken} from "./redux/slices/Token/slice";
 import {selectIsContextMenuOpen, selectIsToastShown} from "./redux/slices/PlayListContextMenu/selectors";
 import Toast from "./components/Toast/Toast";
 import useShowToast from "./hooks/useShowToast";
@@ -18,7 +18,7 @@ import ModalRecommendation from "./components/ModalRecommendation/ModalRecommend
 import ModalEmbedPlaylist from "./components/ModalEmbedPlalist/ModalEmbedPlalist";
 
 function App() {
-    const [registration, setRegistration] = useState(false)
+    const [registration, setRegistration] = useState(true)
     const {isOpenRecommendation, isOpenEmbed} = useSelector(selectModal)
     const registrationRef = useRef(registration)
     const contentWrapperRef = useRef()

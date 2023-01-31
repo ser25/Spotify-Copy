@@ -1,5 +1,6 @@
 import React from 'react';
 import {PlayIcon} from "@heroicons/react/20/solid";
+import logo from "../Sidebar/Logo";
 
 const PlayListButtonPlay = () => {
     return (
