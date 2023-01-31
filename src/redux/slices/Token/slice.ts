@@ -1326,26 +1326,26 @@ export const RegistrationSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase(fetchAlbums.pending, (state, action) =>{
-            console.log('pending albums')
+            // console.log('pending albums')
         })
         builder.addCase(fetchAlbums.fulfilled, (state, action) =>{
             state.albums = action.payload
-            console.log('SUCCESS albums')
+            // console.log('SUCCESS albums')
         })
         builder.addCase(fetchAlbums.rejected, (state, action) =>{
-            console.log('error albums')
+            // console.log('error albums')
         })
 
 
         builder.addCase(fetchMeInformation.pending, (state, action) =>{
-            console.log('pending me')
+            // console.log('pending me')
         })
         builder.addCase(fetchMeInformation.fulfilled, (state, action) =>{
             state.me = action.payload
-            console.log('SUCCESS me')
+            // console.log('SUCCESS me')
         })
         builder.addCase(fetchMeInformation.rejected, (state, action) =>{
-            console.log('error me')
+            // console.log('error me')
         })
     }
 })

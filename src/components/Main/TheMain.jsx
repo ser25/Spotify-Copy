@@ -40,8 +40,8 @@ const TheMain = () => {
                          lg:grid-cols-playlists-desktop gap-5"
                         >
                             {albums.map(album =>
-                                <PlayList key={album.id} url={album.images[0].url} title={album.name}
-                                          singer={album.artists[0].name} albumUrl={album.external_urls.spotify}/>
+                                <PlayList id={album?.id} key={album?.id} url={album?.images[0].url} title={album?.name}
+                                          singer={album?.artists[0].name} albumUrl={album?.external_urls.spotify}/>
                             )}
                             {/*<PlayList/>*/}
                         </div>

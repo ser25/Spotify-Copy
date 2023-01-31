@@ -22,9 +22,10 @@ import useShowToast from "../../hooks/useShowToast";
 import {selectPopover} from "../../redux/slices/Popover/selectors";
 import {selectModal} from "../../redux/slices/Modal/selectors";
 import Modal from "../../UI/Modal/Modal";
+import {Link} from "react-router-dom";
 
 
-const PlayList = ({title, url, singer, albumUrl}) => {
+const PlayList = ({title, url, singer, albumUrl, id}) => {
 
     const dispatch = useAppDispatch()
     const closeToastTimer = useRef();
@@ -62,16 +63,16 @@ const PlayList = ({title, url, singer, albumUrl}) => {
         }
     })
 
-    function handleClick(e){
-        e.preventDefault()
-        console.log('click')
+    function handleClick(e) {
+        // e.preventDefault()
+        // console.log('click')
     }
 
 
     return (
         <>
-            <a
-                href="/"
+            <Link
+                to={`/albumsPage/${id}`}
                 className={`relative p-4 rounded-md  duration-200 group ${bgClasses}`}
                 onContextMenu={openContextMenu}
                 onClick={handleClick}
@@ -83,10 +84,11 @@ const PlayList = ({title, url, singer, albumUrl}) => {
                 <PlayListTitle title={title}/>
                 <PlayListDescription singer={singer}/>
                 {isOpen && (<PlayListContextMenu menuItems={menuItems} ref={ref} albumUrl={albumUrl}
-                                                 setIsOpen={setIsOpen} isOpen={isOpen}/>)}
+                                                 setIsOpen={setIsOpen} isOpen={isOpen}
+                />)}
 
 
-            </a>
+            </Link>
 
 
         </>

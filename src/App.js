@@ -16,9 +16,11 @@ import {selectModal} from "./redux/slices/Modal/selectors";
 import useEvent from "./hooks/useEvent";
 import ModalRecommendation from "./components/ModalRecommendation/ModalRecommendation";
 import ModalEmbedPlaylist from "./components/ModalEmbedPlalist/ModalEmbedPlalist";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import Albums from "./pages/Albums/Albums";
 
 function App() {
-    const [registration, setRegistration] = useState(true)
+    const [registration, setRegistration] = useState(false)
     const {isOpenRecommendation, isOpenEmbed} = useSelector(selectModal)
     const registrationRef = useRef(registration)
     const contentWrapperRef = useRef()
@@ -41,7 +43,13 @@ function App() {
                 <TheSidebarOverlay/>
                 <div className="flex-1 overflow-auto" ref={contentWrapperRef}>
                     <TheHeader/>
-                    <TheMain/>
+                    <BrowserRouter>
+                        <Routes>
+                            <Route path="/" element={<TheMain />}/>
+                            <Route path="/albumsPage/:id" element={<Albums />}/>
+                        </Routes>
+                    </BrowserRouter>
+
                 </div>
             </div>
             {registrationRef.current && <TheRegistration setRegistration={setRegistration}/>}
