@@ -6,10 +6,15 @@ import axios from "axios";
 import {setToken} from "../../redux/slices/Token/slice";
 import TrackAlbums from "./TrackAlbums";
 import AlbumsHeader from "./AlbumsHeader";
+import {ClockIcon, HeartIcon, EllipsisHorizontalIcon} from "@heroicons/react/24/outline";
+import Copyrights from "./Copyrights";
+import AlbumsButtonPlay from "./AlbumsButtonPlay";
+import AlbumsIconBlock from "./AlbumsIconBlock";
 
 const Albums = () => {
     const [album, setAlbum] = useState()
     const [tracks, setTracks] = useState()
+    const [copyrights, setCopyrights] = useState()
     const dispatch = useAppDispatch()
     const {token} = useToken()
     const {id} = useParams()
@@ -23,6 +28,7 @@ const Albums = () => {
                 })
                 setAlbum(data)
                 setTracks(data.tracks.items)
+                setCopyrights(data.copyrights)
             } catch (error) {
                 alert('error')
             }
@@ -42,10 +48,17 @@ const Albums = () => {
             <div>
                 <AlbumsHeader album={album}/>
                 <div className={"px-8"}>
-                    <div className={'mb-4 border-b-2'}># Title</div>
+                    <AlbumsIconBlock name={album?.name}/>
+                    <div className={'border-b-2 flex justify-between'}>
+                        <div className={'mb-4 '}># Title</div>
+                        <ClockIcon className={'h-6 w-6'}/>
+                    </div>
+
                     {tracks.map((track, index) =>
-                        <TrackAlbums key={track.name} track={track} singer={album.artists[0].name} namber={index}/>
+                        <TrackAlbums key={track.name} track={track} singer={album?.artists[0].name} namber={index}/>
                     )}
+
+                    <Copyrights copyrights={copyrights} />
                 </div>
 
             </div>
