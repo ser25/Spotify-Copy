@@ -5,20 +5,32 @@ import {useAppDispatch} from "../../redux/store";
 import axios from "axios";
 import {setToken} from "../../redux/slices/Token/slice";
 import TrackAlbums from "./TrackAlbums";
-import AlbumsHeader from "./AlbumsHeader";
+import AlbumsHeader from "./components/AlbumsHeader";
 import {ClockIcon, HeartIcon, EllipsisHorizontalIcon} from "@heroicons/react/24/outline";
-import Copyrights from "./Copyrights";
-import AlbumsButtonPlay from "./AlbumsButtonPlay";
-import AlbumsIconBlock from "./AlbumsIconBlock";
+import Copyrights from "./components/Copyrights";
+import AlbumsButtonPlay from "./components/AlbumsButtonPlay";
+import AlbumsIconBlock from "./components/AlbumsIconBlock";
+import AlbumsMenu from "./components/AlbumsMenu/AlbumsMenu";
 
 const Albums = () => {
-    const [album, setAlbum] = useState()
+    const [album, setAlbum] = useState({})
     const [tracks, setTracks] = useState()
     const [copyrights, setCopyrights] = useState()
+
     const dispatch = useAppDispatch()
     const {token} = useToken()
     const {id} = useParams()
     useEffect(() => {
+        function localAlbum(){
+            let isAlbum = window.localStorage.getItem('album')
+            if (isAlbum) {
+                isAlbum = JSON.parse(isAlbum)
+                setAlbum(isAlbum)
+                setTracks(isAlbum.tracks.items)
+                setCopyrights(isAlbum.copyrights)
+                return
+            }
+        }
         async function fetchAlbum() {
             try {
                 const {data} = await axios.get(`https://api.spotify.com/v1/albums/${id}`, {
@@ -26,15 +38,16 @@ const Albums = () => {
                         Authorization: `Bearer ${token}`
                     },
                 })
+                window.localStorage.setItem("album", JSON.stringify(data))
                 setAlbum(data)
                 setTracks(data.tracks.items)
                 setCopyrights(data.copyrights)
             } catch (error) {
-                alert('error')
+                console.log('error')
             }
         }
-
-        fetchAlbum()
+        localAlbum()
+        // fetchAlbum()
 
     }, [token])
     if (!album) {
@@ -59,6 +72,11 @@ const Albums = () => {
                     )}
 
                     <Copyrights copyrights={copyrights} />
+                </div>
+
+                <div className={"relative"}>
+
+
                 </div>
 
             </div>

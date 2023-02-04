@@ -43,14 +43,12 @@ function useContextMenu() {
 
     const openContextMenu = (e) => {
         e.preventDefault()
-
         updateClickCoordinates(e.clientX, e.clientY)
         setIsOpen(true)
         dispatch(setIsScrollWrapper(true))
 
 
     }
-
     return {openContextMenu, isOpen, ref, setIsOpen}
 }
 

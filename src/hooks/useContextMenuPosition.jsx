@@ -1,8 +1,9 @@
-import {useLayoutEffect, useRef} from "react";
+import {useLayoutEffect, useRef, useState} from "react";
 
 const clickPosition = {x: null, y: null}
 
-function useContextMenuPosition(ref, isOpen) {
+function useContextMenuPosition(ref, isOpen, positionAlbums = 0) {
+    const [shouldMoveUp, setShouldMoveUp] = useState()
 
 
     useLayoutEffect(() => {
@@ -21,9 +22,10 @@ function useContextMenuPosition(ref, isOpen) {
         const menuHeight = ref.current.offsetHeight;
         const shouldMoveUp = menuHeight > window.innerHeight - clickPosition.y;
 
+
         ref.current.style.top = shouldMoveUp
-            ? `${clickPosition.y - menuHeight}px`
-            : `${clickPosition.y}px`;
+            ? `${clickPosition.y - positionAlbums - menuHeight}px`
+            : `${clickPosition.y + positionAlbums}px`;
     }
 
     function updateContextMenuHorizontalPosition() {
